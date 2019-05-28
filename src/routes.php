@@ -21,20 +21,11 @@ return function (App $app) {
             ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
     });
 
-    // All individual entities
-    $app->get('/pessoas/', function (Request $request, Response $response, array $args) use ($container) {
-        // Sample log message
-        $container->get('logger')->info("Pessoas App: [GET] pessoas/");
-
-        $connection = $this->db;
-        $stmt = $connection->query("SELECT * FROM Users;");
-
-        $data = $stmt->fetchAll();
-
-        return $response->withJson($data);
-    });
-
-
+    // ---> 
+    // Import modularized routes
+    // ---> 
+    $peopleCRUD = require __DIR__ . '/../src/base/Pessoa.php'; // Pessoa Entity
+    $peopleCRUD($app, $container);
 
     // Catch-all route to serve a 404 Not Found page if none of the routes match
     // NOTE: make sure this route is defined last
