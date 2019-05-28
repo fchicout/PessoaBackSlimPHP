@@ -15,13 +15,14 @@ return function (App $app) {
     $app->add(function ($req, $res, $next) {
         $response = $next($req, $res);
         return $response
+            ->withHeader('Content-type', 'application/json')
             ->withHeader('Access-Control-Allow-Origin', '*')
             ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
             ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
     });
 
     // All individual entities
-    $app->get('pessoas/', function (Request $request, Response $response, array $args) use ($container) {
+    $app->get('/pessoas/', function (Request $request, Response $response, array $args) use ($container) {
         // Sample log message
         $container->get('logger')->info("Pessoas App: [GET] pessoas/");
 
@@ -30,9 +31,7 @@ return function (App $app) {
 
         $data = $stmt->fetchAll();
 
-        $new_response = $response->withJson($data);
-        // Render index view
-        return $new_response;
+        return $response->withJson($data);
     });
 
 
