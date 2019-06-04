@@ -3,5 +3,7 @@
 /logs
 /assets/lib
 /db
+/logs
 .DS_STORE
 composer.lock
+
