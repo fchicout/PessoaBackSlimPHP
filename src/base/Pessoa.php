@@ -7,7 +7,7 @@ use Slim\Http\Response;
 return function ($app, $container) {
 
     // GET All individual entities from DB
-    $app->get('/pessoas/', function (Request $request, Response $response, array $args) use ($container) {
+    $app->get('/pessoa/', function (Request $request, Response $response, array $args) use ($container) {
         // Sample log message
         $container->get('logger')->info("Pessoas App: [GET] pessoas/");
 
@@ -21,7 +21,7 @@ return function ($app, $container) {
     });
 
     // POST get next id
-    $app->post('/pessoas/', function (Request $request, Response $response, array $args) use ($container) {
+    $app->post('/pessoa/', function (Request $request, Response $response, array $args) use ($container) {
         // Sample log message
         $container->get('logger')->info("Pessoas App: [POST] pessoas/. Received Data: " . json_encode($args));
 
@@ -40,7 +40,7 @@ return function ($app, $container) {
 
     // POST a new user to DB;
     // REMEMBER: 2 Steps!!
-    $app->post('/pessoas/{id}', function (Request $request, Response $response, array $args) use ($container) {
+    $app->post('/pessoa/{id}', function (Request $request, Response $response, array $args) use ($container) {
         
         $body = $request->getParsedBody();
         
